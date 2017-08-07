@@ -1,2 +1,79 @@
-# jsonpbaidu
-跨域访问百度
+# 跨域访问百度jsonpbaidu
+
+效果如下：
+![](images/img.gif)
+
+all code:
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .soutu-btn{
+            z-index: 1;
+            position: absolute;
+            right: 34%;
+            top: 50%;
+            margin-top: -30px;
+            height: 16px;
+            width: 18px;
+            background: #fff url(https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/cache/static/protocol/https/soutu/img/camera_new_679c15cc.png) no-repeat;
+            background-image: -webkit-image-set(url(https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/cache/static/protocol/https/soutu/img/camera_new_679c15cc.png) 1x,url(https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/cache/static/protocol/https/soutu/img/camera_new_x2_0d93badf.png) 2x);
+            background-image: -moz-image-set(url(https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/cache/static/protocol/https/soutu/img/camera_new_679c15cc.png) 1x,url(https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/cache/static/protocol/https/soutu/img/camera_new_x2_0d93badf.png) 2x);
+            background-image: -o-image-set(url(https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/cache/static/protocol/https/soutu/img/camera_new_679c15cc.png) 1x,url(https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/cache/static/protocol/https/soutu/img/camera_new_x2_0d93badf.png) 2x);
+            background-image: -ms-image-set(url(https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/cache/static/protocol/https/soutu/img/camera_new_679c15cc.png) 1x,url(https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/cache/static/protocol/https/soutu/img/camera_new_x2_0d93badf.png) 2x);
+            cursor: pointer;
+        }
+        input{width:600px;height:30px;border:1px solid blue;margin-top:100px;margin-left:300px;}
+        li{list-style:none;background:lightgoldenrodyellow ;width:600px;height:30px;display:none;}
+        ul{margin-left:260px;}
+        .aa{display:block;}
+    </style>
+</head>
+<body>
+<span class="soutu-btn"></span>
+<input type="text">
+<ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+</body>
+</html>
+<script src="jquery.js "></script>
+<script>
+    $(function(){
+        $("input").keyup(function(){
+            $.ajax({
+                type:"get",
+                data:"wd="+$(this).val(),
+                dataType:"jsonP",
+                url:"http://suggestion.baidu.com/su",
+                success:function(data){
+                }
+            });
+        });
+    });
+    var baidu={
+        sug:function(data){
+            for(var i=0;i<10;i++){
+                document.getElementsByTagName ("li")[i].setAttribute("class","aa");
+                document.getElementsByTagName ("li")[i].innerText =data.s[i];
+                if($("input").val().length>8||$("input").val().length==0){
+                    $("li").removeAttr("class")
+                }
+            }
+        }
+    }
+</script>
+```
+
